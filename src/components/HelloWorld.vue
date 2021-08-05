@@ -35,6 +35,9 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  mounted() {
+    console.log(this.$store.state.game.message);
   }
 }
 </script>
