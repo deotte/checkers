@@ -37,7 +37,7 @@ export default {
     msg: String
   },
   mounted() {
-    console.log(this.$store.state.game.message);
+    console.log(this.$store.state.game.board);
   }
 }
 </script>
