@@ -3,7 +3,7 @@ let initialBoard = [];
 const teamOneSpots = [2, 4, 6, 8, 9, 11, 13, 15, 18, 20, 22, 24];
 const teamTwoSpots = [41, 43, 45, 47, 50, 52, 54, 56, 57, 59, 61, 63];
 
-for (let i = 0; i <= 64; i++) {
+for (let i = 1; i <= 64; i++) {
   let spot = {};
 
   if (teamOneSpots.includes(i)) {
