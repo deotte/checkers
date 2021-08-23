@@ -3,8 +3,14 @@
     <div class="spot"
          v-for="spot in board"
          :key="spot.position">
-      <div class="piece" v-if="spot.piece">
-      </div>
+        <div class="piece"
+             @click="spotIsClicked(spot.piece)"
+             v-if="spot.hasOwnProperty('piece')">
+        </div>
+        <div class="empty"
+             @click="movePiece(spot.position)"
+             v-else>
+        </div>
     </div>
   </div>
 </template>
@@ -16,7 +22,14 @@ export default {
   },
   data() {
     return {
-      board: this.$store.state.game.board
+      board: this.$store.state.game.board,
+    }
+  },
+  methods: {
+    showSpots(piece) {
+      // eslint-disable-next-line no-debugger
+      debugger;
+      console.log(piece);
     }
   },
   mounted() {
@@ -51,5 +64,11 @@ export default {
     height: 75%;
     margin: auto;
     border-radius: 50%;
+  }
+
+  .empty {
+    width: 75%;
+    height: 75%;
+    margin: auto;
   }
 </style>

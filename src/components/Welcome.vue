@@ -1,0 +1,1 @@
+// Component for selecting rules, team, and colors

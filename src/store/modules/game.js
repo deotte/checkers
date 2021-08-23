@@ -1,12 +1,13 @@
 let initialBoard = [];
 
-const teamOneSpots = [2, 4, 6, 8, 9, 11, 13, 15, 18, 20, 22, 24];
-const teamTwoSpots = [41, 43, 45, 47, 50, 52, 54, 56, 57, 59, 61, 63];
+const TEAM_ONE_SPOTS = [2, 4, 6, 8, 9, 11, 13, 15, 18, 20, 22, 24];
+const TEAM_TWO_SPOTS = [41, 43, 45, 47, 50, 52, 54, 56, 57, 59, 61, 63];
 
+// Set initial board up
 for (let i = 1; i <= 64; i++) {
   let spot = {};
 
-  if (teamOneSpots.includes(i)) {
+  if (TEAM_ONE_SPOTS.includes(i)) {
     spot.empty = false;
     spot.piece = {
       position: i,
@@ -14,7 +15,7 @@ for (let i = 1; i <= 64; i++) {
       direction: 'forward',
       team: 1
     }
-  } else if (teamTwoSpots.includes(i)) {
+  } else if (TEAM_TWO_SPOTS.includes(i)) {
     spot.empty = false;
     spot.piece = {
       position: i,
@@ -31,10 +32,22 @@ for (let i = 1; i <= 64; i++) {
 }
 
 const state = () => ({
-  message: 'Hello',
+  availableMoves: [],
   board: initialBoard,
+  spotSelected: false,
+  team: 1
 });
 
+const mutations = {
+  setSpotSelected (state, status) {
+    state.spotSelected = status;
+  },
+  setAvailableMoves(state, payload) {
+    state.availableMoves = payload;
+  }
+}
+
 export default {
-  state
+  state,
+  mutations
 }
