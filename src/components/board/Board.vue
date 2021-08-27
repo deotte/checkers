@@ -4,7 +4,7 @@
          v-for="spot in board"
          :key="spot.position">
         <div class="piece"
-             @click="spotIsClicked(spot.piece)"
+             @click="showAvailableSpots(spot.piece)"
              v-if="spot.hasOwnProperty('piece')">
         </div>
         <div class="empty"
@@ -15,6 +15,9 @@
   </div>
 </template>
 <script>
+// eslint-disable-next-line no-unused-vars
+import spotIsClicked from '../../utilities/checkers';
+
 export default {
   name: 'Board',
   props: {
@@ -26,14 +29,11 @@ export default {
     }
   },
   methods: {
-    showSpots(piece) {
-      // eslint-disable-next-line no-debugger
-      debugger;
-      console.log(piece);
+    showAvailableSpots(piece) {
+      spotIsClicked(piece);
     }
   },
   mounted() {
-    console.log(this.board.length);
   }
 }
 </script>
