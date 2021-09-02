@@ -34,16 +34,20 @@ for (let i = 1; i <= 64; i++) {
 const state = () => ({
   availableMoves: [],
   board: initialBoard,
+  directionCounter: [],
   spotSelected: false,
   team: 1
 });
 
 const mutations = {
-  setSpotSelected (state, status) {
-    state.spotSelected = status;
-  },
   setAvailableMoves(state, payload) {
     state.availableMoves = payload;
+  },
+  setDirectionCounter(state, payload) {
+    state.directionCounter = payload;
+  },
+  setSpotSelected (state, status) {
+    state.spotSelected = status;
   }
 }
 

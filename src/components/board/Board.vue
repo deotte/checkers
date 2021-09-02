@@ -8,7 +8,6 @@
              v-if="spot.hasOwnProperty('piece')">
         </div>
         <div class="empty"
-             @click="movePiece(spot.position)"
              v-else>
         </div>
     </div>
@@ -16,7 +15,7 @@
 </template>
 <script>
 // eslint-disable-next-line no-unused-vars
-import spotIsClicked from '../../utilities/checkers';
+import { spotIsClicked } from '../../utilities/checkers.js';
 
 export default {
   name: 'Board',
@@ -30,6 +29,7 @@ export default {
   },
   methods: {
     showAvailableSpots(piece) {
+      // eslint-disable-next-line no-debugger
       spotIsClicked(piece);
     }
   },
