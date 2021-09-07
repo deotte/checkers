@@ -92,4 +92,4 @@ function handleBottomSpot(piece) {
   }
 }
 
-export { determineCounter };
+export { determineCounter, LEFT_SPOTS, RIGHT_SPOTS, TOP_SPOTS, BOTTOM_SPOTS, OUTER_SPOTS };
