@@ -6,17 +6,16 @@ import store from "../store";
 import { determineCounter } from "./directionCounter";
 import { calculateMoves } from "./availableMoves";
 
-function spotIsClicked(piece) {
+function spotIsClicked(spot) {
   let currentTeam = store.state.game.team;
 
-  if (piece.team !== currentTeam) {
+  if (spot.piece && spot.piece.team !== currentTeam) {
     return;
   } else {
-    store.commit('setSpotSelected', true); 
-    // Maybe we don't need this? maybe just check state.availableMoves in the next function
+    store.commit('setSelectedSpot', spot);
 
-    determineCounter(piece);
-    calculateMoves(piece);
+    determineCounter(spot.piece);
+    calculateMoves(spot.piece);
   }
 }
 

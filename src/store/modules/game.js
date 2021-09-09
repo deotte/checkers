@@ -35,7 +35,7 @@ const state = () => ({
   availableMoves: [],
   board: initialBoard,
   directionCounter: [],
-  spotSelected: false,
+  selectedSpot: {},
   team: 1
 });
 
@@ -46,8 +46,8 @@ const mutations = {
   setDirectionCounter(state, payload) {
     state.directionCounter = payload;
   },
-  setSpotSelected (state, status) {
-    state.spotSelected = status;
+  setSelectedSpot(state, spot) {
+    state.selectedSpot = spot;
   }
 }
 

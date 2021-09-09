@@ -4,7 +4,7 @@
          v-for="spot in board"
          :key="spot.position">
         <div class="piece"
-             @click="showAvailableSpots(spot.piece)"
+             @click="showAvailableSpots(spot)"
              v-if="spot.hasOwnProperty('piece')">
         </div>
         <div class="empty"
@@ -28,9 +28,9 @@ export default {
     }
   },
   methods: {
-    showAvailableSpots(piece) {
+    showAvailableSpots(spot) {
       // eslint-disable-next-line no-debugger
-      spotIsClicked(piece);
+      spotIsClicked(spot);
     }
   },
   mounted() {
