@@ -54,11 +54,13 @@ function spotIsValid(position, count) {
 }
 
 function addSpotToAvailableMoves(position) {
-  console.log(position + ' I am valid !!!!!!!');
+  let currentBoard = store.state.game.board;
+  let spot = currentBoard.find(spot => spot.position === position);
+  store.commit('addAvailableMove', spot);
 }
 
 function addPreLoadedSpot(spot) {
-  console.log(spot.position + ' I AM VALIIIDDD !!!');
+  store.commit('addAvailableMove', spot);
 }
 
 /*

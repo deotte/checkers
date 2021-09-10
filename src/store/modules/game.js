@@ -40,8 +40,11 @@ const state = () => ({
 });
 
 const mutations = {
-  setAvailableMoves(state, payload) {
-    state.availableMoves = payload;
+  addAvailableMove(state, payload) {
+    state.availableMoves.push(payload);
+  },
+  clearAvailableMoves(state) {
+    state.availableMoves = [];
   },
   setDirectionCounter(state, payload) {
     state.directionCounter = payload;

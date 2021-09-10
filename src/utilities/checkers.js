@@ -12,10 +12,15 @@ function spotIsClicked(spot) {
   if (spot.piece && spot.piece.team !== currentTeam) {
     return;
   } else {
+    if (store.state.game.availableMoves.length > 0) {
+      store.commit('clearAvailableMoves');  
+    }
+
     store.commit('setSelectedSpot', spot);
 
     determineCounter(spot.piece);
     calculateMoves(spot.piece);
+    console.log(store.state.game.availableMoves);
   }
 }
 
