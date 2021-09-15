@@ -35,7 +35,7 @@ const state = () => ({
   availableMoves: [],
   board: initialBoard,
   directionCounter: [],
-  selectedSpot: {},
+  selectedPiece: {},
   team: 1
 });
 
@@ -46,11 +46,14 @@ const mutations = {
   clearAvailableMoves(state) {
     state.availableMoves = [];
   },
+  // moveSelectedPiece(state, spot) {
+
+  // },
   setDirectionCounter(state, payload) {
     state.directionCounter = payload;
   },
-  setSelectedSpot(state, spot) {
-    state.selectedSpot = spot;
+  setSelectedPiece(state, piece) {
+    state.selectedPiece = piece;
   }
 }
 

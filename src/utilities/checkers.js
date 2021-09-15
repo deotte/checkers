@@ -16,7 +16,7 @@ function spotIsClicked(spot) {
       store.commit('clearAvailableMoves');  
     }
 
-    store.commit('setSelectedSpot', spot);
+    store.commit('setSelectedPiece', spot.piece);
 
     determineCounter(spot.piece);
     calculateMoves(spot.piece);
@@ -24,12 +24,11 @@ function spotIsClicked(spot) {
   }
 }
 
-function movePiece(piece, position) {
-
+function movePiece(spot) {
 }
 
 function kingPiece(piece) {
   return piece.king === true;
 }
 
-export { spotIsClicked, kingPiece };
+export { movePiece, spotIsClicked, kingPiece };

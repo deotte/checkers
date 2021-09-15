@@ -8,14 +8,14 @@ import { LEFT_SPOTS, RIGHT_SPOTS, TOP_SPOTS, BOTTOM_SPOTS, OUTER_SPOTS } from ".
 function calculateMoves(piece) {
   let availableMoves = [];
   let counter = store.state.game.directionCounter;
-  let selectedSpot = store.state.game.selectedSpot;
+  let selectedPiece = store.state.game.selectedPiece;
 
   counter.forEach((count, index) => {
     let position = piece.position;
 
     while (position < 64 && position > 1) {
       // If you start at an outside piece, no need to change direction  
-      if (OUTER_SPOTS.includes(position) && position !== selectedSpot.position) {
+      if (OUTER_SPOTS.includes(position) && position !== selectedPiece.position) {
         changeDirection(position, count);
         break;
       }
@@ -35,12 +35,12 @@ function calculateMoves(piece) {
 function spotIsValid(position, count) {
   let currentBoard = store.state.game.board;
   let currentTeam = store.state.game.team;
-  let selectedSpot = store.state.game.selectedSpot;
+  let selectedPiece = store.state.game.selectedPiece;
   let nextSpot = currentBoard.find(spot => spot.position === position + count);
   
   // I'm not proud of this
   if (nextSpot.empty) {
-    if (selectedSpot.position === position) {
+    if (selectedPiece.position === position) {
       addPreLoadedSpot(nextSpot);
       return false;
     } else {

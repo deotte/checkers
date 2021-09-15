@@ -2,20 +2,22 @@
   <div class="board-wrapper">
     <div class="spot"
          v-for="spot in board"
+         :id="spot.position"
          :key="spot.position">
         <div class="piece"
              @click="showAvailableSpots(spot)"
+             :id="'piece-' + spot.position"
              v-if="spot.hasOwnProperty('piece')">
         </div>
         <div class="empty"
+             @click="moveToSpot(spot)"
              v-else>
         </div>
     </div>
   </div>
 </template>
 <script>
-// eslint-disable-next-line no-unused-vars
-import { spotIsClicked } from '../../utilities/checkers.js';
+import { movePiece, spotIsClicked } from '../../utilities/checkers.js';
 
 export default {
   name: 'Board',
@@ -28,8 +30,10 @@ export default {
     }
   },
   methods: {
+    moveToSpot(spot) {
+      movePiece(spot);
+    },
     showAvailableSpots(spot) {
-      // eslint-disable-next-line no-debugger
       spotIsClicked(spot);
     }
   },
