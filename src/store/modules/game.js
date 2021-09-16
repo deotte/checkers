@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 let initialBoard = [];
 
 const TEAM_ONE_SPOTS = [2, 4, 6, 8, 9, 11, 13, 15, 18, 20, 22, 24];
@@ -25,6 +26,7 @@ for (let i = 1; i <= 64; i++) {
     }
   } else {
     spot.empty = true;
+    spot.piece = null;
   }
 
   spot.position = i;
@@ -35,9 +37,23 @@ const state = () => ({
   availableMoves: [],
   board: initialBoard,
   directionCounter: [],
-  selectedPiece: {},
+  selectedSpot: {},
   team: 1
 });
+
+const actions = {
+  moveToSelectedSpot(context, spot) {
+    let currentBoard = context.state.board;
+    let newSpot = currentBoard.find(element => element.position === spot.position);
+    let oldSpot = context.state.selectedSpot;
+
+    newSpot.piece = oldSpot.piece;
+    newSpot.empty = false;
+
+    oldSpot.empty = true;
+    oldSpot.piece = null;
+  }
+}
 
 const mutations = {
   addAvailableMove(state, payload) {
@@ -46,18 +62,16 @@ const mutations = {
   clearAvailableMoves(state) {
     state.availableMoves = [];
   },
-  // moveSelectedPiece(state, spot) {
-
-  // },
   setDirectionCounter(state, payload) {
     state.directionCounter = payload;
   },
-  setSelectedPiece(state, piece) {
-    state.selectedPiece = piece;
+  setSelectedSpot(state, spot) {
+    state.selectedSpot = spot;
   }
 }
 
 export default {
   state,
+  actions,
   mutations
 }

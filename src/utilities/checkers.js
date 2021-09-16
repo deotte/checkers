@@ -16,19 +16,19 @@ function spotIsClicked(spot) {
       store.commit('clearAvailableMoves');  
     }
 
-    store.commit('setSelectedPiece', spot.piece);
+    store.commit('setSelectedSpot', spot);
 
     determineCounter(spot.piece);
     calculateMoves(spot.piece);
-    console.log(store.state.game.availableMoves);
   }
 }
 
-function movePiece(spot) {
+function moveToNewSpot(spot) {
+  store.dispatch('moveToSelectedSpot', spot);
 }
 
 function kingPiece(piece) {
   return piece.king === true;
 }
 
-export { movePiece, spotIsClicked, kingPiece };
+export { moveToNewSpot, spotIsClicked, kingPiece };

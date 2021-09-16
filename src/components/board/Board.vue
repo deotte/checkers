@@ -7,7 +7,7 @@
         <div class="piece"
              @click="showAvailableSpots(spot)"
              :id="'piece-' + spot.position"
-             v-if="spot.hasOwnProperty('piece')">
+             v-if="spot.piece">
         </div>
         <div class="empty"
              @click="moveToSpot(spot)"
@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-import { movePiece, spotIsClicked } from '../../utilities/checkers.js';
+import { moveToNewSpot, spotIsClicked } from '../../utilities/checkers.js';
 
 export default {
   name: 'Board',
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     moveToSpot(spot) {
-      movePiece(spot);
+      moveToNewSpot(spot);
     },
     showAvailableSpots(spot) {
       spotIsClicked(spot);
