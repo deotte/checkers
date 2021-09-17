@@ -11,7 +11,7 @@ for (let i = 1; i <= 64; i++) {
   if (TEAM_ONE_SPOTS.includes(i)) {
     spot.empty = false;
     spot.piece = {
-      position: i,
+      id: i,
       king: false,
       direction: 'forward',
       team: 1
@@ -19,7 +19,7 @@ for (let i = 1; i <= 64; i++) {
   } else if (TEAM_TWO_SPOTS.includes(i)) {
     spot.empty = false;
     spot.piece = {
-      position: i,
+      id: i,
       king: false,
       direction: 'backward',
       team: 2
@@ -52,12 +52,21 @@ const actions = {
 
     oldSpot.empty = true;
     oldSpot.piece = null;
+
+    if (context.state.currentTeam === 1) {
+      context.commit('changeCurrentTeam', 2)
+    } else if (context.state.currentTeam === 2) {
+      context.commit('changeCurrentTeam', 1)
+    }
   }
 }
 
 const mutations = {
   addAvailableMove(state, payload) {
     state.availableMoves.push(payload);
+  },
+  changeCurrentTeam(state, team) {
+    state.team = team;
   },
   clearAvailableMoves(state) {
     state.availableMoves = [];

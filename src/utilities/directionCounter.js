@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-debugger */
 
-import { kingPiece } from "./checkers";
 import store from "../store";
 
 const LEFT_SPOTS = [9, 17, 25, 33, 41, 49, 57];
@@ -11,18 +10,19 @@ const RIGHT_SPOTS = [16, 24, 32, 40, 48, 56, 64];
 const BOTTOM_SPOTS = [57, 58, 59, 60, 61, 62, 63, 64];
 const OUTER_SPOTS = LEFT_SPOTS + TOP_SPOTS + RIGHT_SPOTS + BOTTOM_SPOTS;
 
-function determineCounter(piece) {
-  let position = piece.position;
+function determineCounter(spot) {
+  let piece = spot.piece;
+  let position = spot.position;
   let counter = [];
 
   if (LEFT_SPOTS.includes(position)) {
     counter = handleLeftSpot(piece);
   } else if (TOP_SPOTS.includes(position)) {
-    counter = handleTopSpot(piece);
+    counter = handleTopSpot(position, piece);
   } else if (RIGHT_SPOTS.includes(position)) {
     counter = handleRightSpot(piece);
   } else if (BOTTOM_SPOTS.includes(position)) {
-    counter = handleBottomSpot(piece);
+    counter = handleBottomSpot(position, piece);
   } else {
     counter = handleRegularSpot(piece);
   }
@@ -72,24 +72,28 @@ function handleRegularSpot(piece) {
   Bottom pieces can only move backward, or up.
 */
 
-function handleTopSpot(piece) {
-  if (piece.position === 1) {
+function handleTopSpot(position, piece) {
+  if (position === 1) {
     return [9];
-  } else if (piece.position === 8) {
+  } else if (position === 8) {
     return [7];
   } else {
     return [7, 9];
   }
 }
 
-function handleBottomSpot(piece) {
-  if (piece.position === 57) {
+function handleBottomSpot(position, piece) {
+  if (position === 57) {
     return [-7];
-  } else if (piece.position === 64) {
+  } else if (position === 64) {
     return [-9];
   } else {
     return [-7, -9];
   }
+}
+
+function kingPiece(piece) {
+  return piece.king === true;
 }
 
 export { determineCounter, LEFT_SPOTS, RIGHT_SPOTS, TOP_SPOTS, BOTTOM_SPOTS, OUTER_SPOTS };

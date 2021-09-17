@@ -17,9 +17,8 @@ function spotIsClicked(spot) {
     }
 
     store.commit('setSelectedSpot', spot);
-
-    determineCounter(spot.piece);
-    calculateMoves(spot.piece);
+    determineCounter(spot);
+    calculateMoves(spot);
   }
 }
 
@@ -27,8 +26,4 @@ function moveToNewSpot(spot) {
   store.dispatch('moveToSelectedSpot', spot);
 }
 
-function kingPiece(piece) {
-  return piece.king === true;
-}
-
-export { moveToNewSpot, spotIsClicked, kingPiece };
+export { moveToNewSpot, spotIsClicked };
