@@ -5,6 +5,7 @@
          :id="spot.position"
          :key="spot.position">
         <div class="piece"
+            :class="'team' + spot.piece.team"
              @click="showAvailableSpots(spot)"
              :id="'piece-' + spot.position"
              v-if="spot.piece">
@@ -37,8 +38,6 @@ export default {
       spotIsClicked(spot);
     }
   },
-  mounted() {
-  }
 }
 </script>
 <style>
@@ -63,7 +62,6 @@ export default {
   }
 
   .piece {
-    background-color: #74992e;
     width: 75%;
     height: 75%;
     margin: auto;
@@ -74,5 +72,13 @@ export default {
     width: 75%;
     height: 75%;
     margin: auto;
+  }
+
+  .team1 {
+    background-color: green;
+  }
+
+  .team2 {
+    background-color: red;
   }
 </style>

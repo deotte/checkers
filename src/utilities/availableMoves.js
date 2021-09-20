@@ -3,6 +3,7 @@
 /* eslint-disable no-debugger */
 
 import store from "../store";
+import { OUTER_SPOTS } from "./directionCounter";
 
 function calculateMoves(spot) {
   let availableMoves = [];
@@ -19,20 +20,40 @@ function calculateMoves(spot) {
       if (nextSpotPosition > 64 || nextSpotPosition < 1) { 
         break;
       }
+              
+      let currentIteratedSpot = currentBoard.find(el => el.position === position); // can also consider this "spot before"
 
-      let currentIteratedSpot = currentBoard.find(el => el.position === position);
-      let nextSpot = currentBoard.find(el => el.position === nextSpotPosition);
+      if (OUTER_SPOTS.includes(nextSpotPosition)) {
+        let nextSpot = currentBoard.find(el => el.position === nextSpotPosition);
 
-      if (nextSpot.empty) {
-        if ((currentIteratedSpot === spot) || currentIteratedSpot.team !== currentTeam) {
-          store.commit('addAvailableMove', nextSpot);
+        if (nextSpot.empty) {
+          if (currentIteratedSpot.piece.team !== currentTeam) {
+            store.commit('setEnemyPieceSpot', currentIteratedSpot);
+            store.commit('addAvailableMove', nextSpot.position);
+          } else if (currentIteratedSpot === spot) {
+            store.commit('addAvailableMove', nextSpot.position);
+          }
+        }
+
+        break;
+      } else {
+        let nextSpot = currentBoard.find(el => el.position === nextSpotPosition);
+
+        if (nextSpot.empty) {
+          if (currentIteratedSpot.piece.team !== currentTeam) {
+            store.commit('setEnemyPieceSpot', currentIteratedSpot);
+            store.commit('addAvailableMove', nextSpot.position);
+          } else if (currentIteratedSpot === spot) {
+            store.commit('addAvailableMove', nextSpot.position);
+          }
+  
+          break;
+        } else if (!nextSpot.empty && nextSpot.piece.team === currentTeam) {
           break;
         }
-      } else if (!nextSpot.empty && nextSpot.team === currentTeam) {
-        break;
-      }
 
-      position += count;
+        position += count;
+      }
     }
   });
 }

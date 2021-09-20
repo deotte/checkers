@@ -23,7 +23,18 @@ function spotIsClicked(spot) {
 }
 
 function moveToNewSpot(spot) {
-  store.dispatch('moveToSelectedSpot', spot);
+  let game = store.state.game;
+
+  if (game.availableMoves.includes(spot.position)) {
+    if (Object.keys(game.spotOfEnemyPiece).length) {
+      store.commit('removePieceFromBoard', game.spotOfEnemyPiece);
+    }
+
+    store.dispatch('moveToSelectedSpot', spot);
+    console.log(game.team);
+  } else {
+    return;
+  }
 }
 
 export { moveToNewSpot, spotIsClicked };

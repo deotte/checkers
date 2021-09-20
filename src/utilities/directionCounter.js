@@ -18,7 +18,7 @@ function determineCounter(spot) {
   if (LEFT_SPOTS.includes(position)) {
     counter = handleLeftSpot(piece);
   } else if (TOP_SPOTS.includes(position)) {
-    counter = handleTopSpot(position, piece);
+    counter = handleTopSpot(position, piece);             
   } else if (RIGHT_SPOTS.includes(position)) {
     counter = handleRightSpot(piece);
   } else if (BOTTOM_SPOTS.includes(position)) {

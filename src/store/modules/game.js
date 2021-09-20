@@ -37,6 +37,7 @@ const state = () => ({
   availableMoves: [],
   board: initialBoard,
   directionCounter: [],
+  spotOfEnemyPiece: {},
   selectedSpot: {},
   team: 1
 });
@@ -53,29 +54,36 @@ const actions = {
     oldSpot.empty = true;
     oldSpot.piece = null;
 
-    if (context.state.currentTeam === 1) {
-      context.commit('changeCurrentTeam', 2)
-    } else if (context.state.currentTeam === 2) {
-      context.commit('changeCurrentTeam', 1)
-    }
+    context.commit('changeCurrentTeam');
   }
 }
 
 const mutations = {
-  addAvailableMove(state, payload) {
-    state.availableMoves.push(payload);
+  addAvailableMove(state, position) {
+    state.availableMoves.push(position);
   },
-  changeCurrentTeam(state, team) {
-    state.team = team;
+  changeCurrentTeam(state) {
+    if (state.team === 1) {
+      state.team = 2;
+    } else if (state.team === 2) {
+      state.team = 1;
+    }
   },
   clearAvailableMoves(state) {
     state.availableMoves = [];
+  },
+  removePieceFromBoard(state, spot) {
+    spot.piece = null;
+    spot.empty = true;
   },
   setDirectionCounter(state, payload) {
     state.directionCounter = payload;
   },
   setSelectedSpot(state, spot) {
     state.selectedSpot = spot;
+  },
+  setEnemyPieceSpot(state, spot) {
+    state.spotOfEnemyPiece = spot;
   }
 }
 
