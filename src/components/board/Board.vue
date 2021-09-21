@@ -1,6 +1,7 @@
 <template>
   <div class="board-wrapper">
     <div class="spot"
+        :class="availableMovesClass(spot)"
          v-for="spot in board"
          :id="spot.position"
          :key="spot.position">
@@ -36,8 +37,13 @@ export default {
     },
     showAvailableSpots(spot) {
       spotIsClicked(spot);
+    },
+    availableMovesClass(spot) {
+      if (this.$store.state.game.availableMoves.includes(spot.position)) {
+        return `availableMove${this.$store.state.game.team}`;
+      }
     }
-  },
+  }
 }
 </script>
 <style>
@@ -80,5 +86,13 @@ export default {
 
   .team2 {
     background-color: red;
+  }
+
+  .availableMove1 {
+    border: 1px solid green;
+  }
+
+  .availableMove2 {
+    border: 1px solid red;
   }
 </style>

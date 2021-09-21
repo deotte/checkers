@@ -5,14 +5,14 @@
 import store from "../store";
 import { OUTER_SPOTS } from "./directionCounter";
 
-function calculateMoves(spot) {
+function calculateMoves(originalSpot) {
   let availableMoves = [];
   let counter = store.state.game.directionCounter;
   let currentBoard = store.state.game.board;
   let currentTeam = store.state.game.team;
 
   counter.forEach((count) => {
-    let position = spot.position;
+    let position = originalSpot.position;
 
     while (position < 64 && position > 1) {
       let nextSpotPosition = position + count;
@@ -30,7 +30,7 @@ function calculateMoves(spot) {
           if (currentIteratedSpot.piece.team !== currentTeam) {
             store.commit('setEnemyPieceSpot', currentIteratedSpot);
             store.commit('addAvailableMove', nextSpot.position);
-          } else if (currentIteratedSpot === spot) {
+          } else if (currentIteratedSpot === originalSpot) {
             store.commit('addAvailableMove', nextSpot.position);
           }
         }
@@ -43,7 +43,7 @@ function calculateMoves(spot) {
           if (currentIteratedSpot.piece.team !== currentTeam) {
             store.commit('setEnemyPieceSpot', currentIteratedSpot);
             store.commit('addAvailableMove', nextSpot.position);
-          } else if (currentIteratedSpot === spot) {
+          } else if (currentIteratedSpot === originalSpot) {
             store.commit('addAvailableMove', nextSpot.position);
           }
   

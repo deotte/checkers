@@ -26,12 +26,13 @@ function moveToNewSpot(spot) {
   let game = store.state.game;
 
   if (game.availableMoves.includes(spot.position)) {
+    store.commit('clearAvailableMoves');
+
     if (Object.keys(game.spotOfEnemyPiece).length) {
       store.commit('removePieceFromBoard', game.spotOfEnemyPiece);
     }
 
     store.dispatch('moveToSelectedSpot', spot);
-    console.log(game.team);
   } else {
     return;
   }
