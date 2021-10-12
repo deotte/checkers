@@ -28,10 +28,12 @@ function calculateMoves(originalSpot) {
 
         if (nextSpot.empty) {
           if (currentIteratedSpot.piece.team !== currentTeam) {
-            store.commit('setEnemyPieceSpot', currentIteratedSpot);
-            store.commit('addAvailableMove', nextSpot.position);
+            addCounterToSpots([currentIteratedSpot, nextSpot], count);
+            addAvailableMove(nextSpotPosition);
+            addEnemySpot(currentIteratedSpot);
           } else if (currentIteratedSpot === originalSpot) {
-            store.commit('addAvailableMove', nextSpot.position);
+            addCounterToSpots([currentIteratedSpot, nextSpot], count);
+            addAvailableMove(nextSpotPosition);
           }
         }
 
@@ -41,10 +43,12 @@ function calculateMoves(originalSpot) {
 
         if (nextSpot.empty) {
           if (currentIteratedSpot.piece.team !== currentTeam) {
-            store.commit('setEnemyPieceSpot', currentIteratedSpot);
-            store.commit('addAvailableMove', nextSpot.position);
+            addCounterToSpots([currentIteratedSpot, nextSpot], count);
+            addAvailableMove(nextSpotPosition);
+            addEnemySpot(currentIteratedSpot);
           } else if (currentIteratedSpot === originalSpot) {
-            store.commit('addAvailableMove', nextSpot.position);
+            addCounterToSpots([currentIteratedSpot, nextSpot], count);
+            addAvailableMove(nextSpotPosition);
           }
   
           break;
@@ -56,6 +60,22 @@ function calculateMoves(originalSpot) {
       }
     }
   });
+}
+
+// Add count as a key to available moves AND enemy spots
+// So that later, we can match the path to the enemy spot
+function addCounterToSpots(spots, counter) {
+  spots.forEach(spot => {
+    store.commit('addCounterToSpot', {spot, counter});
+  });
+}
+
+function addAvailableMove(position) {
+  store.commit('addAvailableMove', position);
+}
+
+function addEnemySpot(spot) {
+  store.commit('addEnemySpot', spot);
 }
 
 export { calculateMoves };

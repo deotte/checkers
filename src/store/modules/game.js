@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 /* eslint-disable no-unused-vars */
 let initialBoard = [];
 
@@ -30,6 +31,7 @@ for (let i = 1; i <= 64; i++) {
   }
 
   spot.position = i;
+  spot.counter = null;
   initialBoard.push(spot);
 }
 
@@ -37,7 +39,7 @@ const state = () => ({
   availableMoves: [],
   board: initialBoard,
   directionCounter: [],
-  spotOfEnemyPiece: {},
+  enemySpots: [],
   selectedSpot: {},
   team: 1
 });
@@ -62,6 +64,12 @@ const mutations = {
   addAvailableMove(state, position) {
     state.availableMoves.push(position);
   },
+  addEnemySpot(state, position) {
+    state.enemySpots.push(position);
+  },
+  addCounterToSpot(state, { spot, counter }) {
+    spot.counter = counter;
+  },
   changeCurrentTeam(state) {
     if (state.team === 1) {
       state.team = 2;
@@ -72,7 +80,10 @@ const mutations = {
   clearAvailableMoves(state) {
     state.availableMoves = [];
   },
-  removePieceFromBoard(state, spot) {
+  clearEnemySpots(state) {
+    state.enemySpots = [];
+  },
+  removeEnemyPieceFromBoard(state, spot) {
     spot.piece = null;
     spot.empty = true;
   },

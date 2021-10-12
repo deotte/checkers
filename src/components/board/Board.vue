@@ -10,10 +10,12 @@
              @click="showAvailableSpots(spot)"
              :id="'piece-' + spot.position"
              v-if="spot.piece">
+          {{ spot.position }}
         </div>
         <div class="empty"
              @click="moveToSpot(spot)"
              v-else>
+          {{ spot.position }}
         </div>
     </div>
   </div>
@@ -72,12 +74,18 @@ export default {
     height: 75%;
     margin: auto;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .empty {
     width: 75%;
     height: 75%;
     margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .team1 {
