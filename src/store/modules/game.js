@@ -57,6 +57,7 @@ const actions = {
     oldSpot.piece = null;
 
     context.commit('changeCurrentTeam');
+    context.commit('removeCountersFromSpots');
   }
 }
 
@@ -86,6 +87,11 @@ const mutations = {
   removeEnemyPieceFromBoard(state, spot) {
     spot.piece = null;
     spot.empty = true;
+  },
+  removeCountersFromSpots(state) {
+    state.board.filter(spot => spot.counter !== null).forEach(spot => {
+      spot.counter = null;
+    });
   },
   setDirectionCounter(state, payload) {
     state.directionCounter = payload;
