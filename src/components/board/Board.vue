@@ -1,5 +1,5 @@
 <template>
-  <div class="board-wrapper">
+  <div class="board-wrapper" v-if="board.length > 0">
     <div class="spot"
         :class="availableMovesClass(spot)"
          v-for="spot in board"
@@ -22,16 +22,17 @@
 </template>
 <script>
 import { moveToNewSpot, spotIsClicked } from '../../utilities/checkers.js';
+import { initialBoard } from '../../utilities/initialBoard.js';
 
 export default {
   name: 'Board',
-  props: {
-
-  },
-  data() {
-    return {
-      board: this.$store.state.game.board,
+  computed: {
+    board() {
+      return this.$store.state.game.board;
     }
+  },
+  created() {
+    this.$store.commit('setInitialBoard', initialBoard);
   },
   methods: {
     moveToSpot(spot) {
